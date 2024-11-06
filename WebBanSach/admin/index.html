@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý tồn kho</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <style>
+      
+    </style>
+  </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tổng quan tồn kho</h1>
+            <p>(Cập nhật lúc GMT+7 10:38)</p>
+            <div class="stats">
+                <div class="stat">
+                    <span>27</span>
+                    <p>Phân loại còn hàng</p>
+                </div>
+                <div class="stat">
+                    <span>53</span>
+                    <p>Phân loại đã ẩn & Đã bị khóa</p>
+                </div>
+                <div class="stat">
+                    <span>1</span>
+                    <p>Phân loại hết hàng</p>
+                </div>
+                <div class="stat">
+                    <span>1</span>
+                    <p>Phân loại sắp hết hàng</p>
+                </div>
+            </div>
+        </div>
+        <div class="management">
+            <h2>Quản lý tồn kho</h2>
+            <div class="toolbar">
+                <button class="toggle-alert">Thông báo sắp hết hàng</button>
+                <button class="download">Tải xuống toàn bộ</button>
+                <button class="bulk-update">Cập nhật hàng loạt</button>
+            </div>
+            <div class="tabs">
+                <button class="tab active" data-tab="con-hang">Còn hàng</button>
+                <button class="tab" data-tab="an-khoa">Đã ẩn & Đã bị khóa</button>
+                <button class="tab" data-tab="het-hang">Hết hàng</button>
+                <button class="tab" data-tab="sap-het-hang">Sắp hết hàng</button>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Tên sản phẩm" id="product-name">
+                <input type="text" placeholder="Vị trí kho" id="warehouse-location">
+                <button class="search-btn">Tìm kiếm</button>
+                <button class="reset-btn">Cài đặt lại</button>
+            </div>
+            <div class="table-wrapper">
+                <table id="inventory-table" class="display">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm/Thông tin phân loại</th>
+                            <th>Tồn bán 7 ngày qua</th>
+                            <th>Tồn bán 30 ngày qua</th>
+                            <th>Vị trí kho</th>
+                            <th>Tồn kho có sẵn</th>
+                            <th>Tồn kho khuyến mãi</th>
+                            <th>Tồn kho tối thiểu</th>
+                            <th>Hoạt động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example row -->
+                        <tr>
+                            <td>Loa Mỹ Nhập Khẩu</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><button class="edit-btn">Sửa</button> <button class="restock-btn">Bổ sung hàng ngay lập tức</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="download-btn-wrapper">
+                    <button class="download-btn">Tải xuống</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+      $(document).ready(function() {
+    $('#inventory-table').DataTable();
+
+    const tabs = document.querySelectorAll('.tab');
+    const tableBody = document.querySelector('tbody');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            // Logic to display relevant table data goes here
+        });
+    });
+
+    document.querySelector('.search-btn').addEventListener('click', () => {
+        const productName = document.getElementById('product-name').value;
+        const warehouseLocation = document.getElementById('warehouse-location').value;
+        // Logic to perform search and update table goes here
+    });
+
+    document.querySelector('.reset-btn').addEventListener('click', () => {
+        document.getElementById('product-name').value = '';
+        document.getElementById('warehouse-location').value = '';
+        // Logic to reset table goes here
+    });
+});
+
+    </script>
+</body>
+</html>
