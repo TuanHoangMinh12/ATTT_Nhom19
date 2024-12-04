@@ -16,6 +16,7 @@ import nhom19.hcmuaf.util.MyUtils;
 @WebServlet(urlPatterns = {"/page/home"})
 public class Home extends HttpServlet {
 
+  // oh no
   private static final long serialVersionUID = 1L;
 
   public Home() {
