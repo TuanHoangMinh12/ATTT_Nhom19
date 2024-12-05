@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Selection Popup</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+    .popup-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 1200px;
+        position: relative;
+        transform: translateY(-50px);
+        transition: transform 0.5s;
+    }
+
+    .popup.show {
+        display: flex;
+        opacity: 1;
+    }
+
+    .popup.show .popup-content {
+        transform: translateY(0);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    .filter-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .filter-container label {
+        display: flex;
+        align-items: center;
+    }
+
+    .table-selected-container {
+        display: flex;
+        gap: 20px;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .table-container {
+        flex: 3;
+    }
+
+    .selected-products {
+        flex: 1;
+        border-left: 1px solid #ddd;
+        padding-left: 20px;
+    }
+
+    .selected-products h3 {
+        margin-bottom: 10px;
+    }
+
+    #selectedProductList {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    #confirmBtn {
+        background-color: #ff5733;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #confirmBtn:hover {
+        background-color: #ff4519;
+    }
+
+
+</style>
+<body>
+<button id="openPopupBtn">Thêm 1 lô hàng mới</button>
+
+<div id="productPopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <h2>Thêm SKU sản phẩm lẻ</h2>
+        <div class="filter-container">
+            <label for="product">Sản phẩm</label>
+            <input type="text" id="product" placeholder="Nhập sản phẩm">
+            <label for="skuId">SKU ID</label>
+            <input type="text" id="skuId" placeholder="Nhập">
+            <label for="category">Phân loại</label>
+            <input type="text" id="category" placeholder="Nhập">
+            <label>
+                <input type="checkbox" id="activeProducts"> Chỉ hiển thị danh sách sản phẩm đang hoạt động
+            </label>
+        </div>
+        <div class="table-selected-container">
+            <div class="table-container">
+                <table id="productTable" class="display">
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Phân loại</th>
+                        <th>Mã SKU</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Rows will be inserted here by DataTables -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="selected-products">
+                <h3>2 SKU đã chọn</h3>
+                <ul id="selectedProductList">
+                    <!-- Selected products will appear here -->
+                </ul>
+            </div>
+        </div>
+        <button id="confirmBtn">Xác nhận</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var selectedProducts = [];
+
+        var table = $('#productTable').DataTable({
+            data: [
+                ['Áo sơ mi nữ', 'M,Pastel', 'SP001'],
+                ['Áo sơ mi nữ', 'hồng,s', '1553796100833624'],
+                ['Áo sơ mi nữ', 'pastel,l', '1536574497522392']
+            ],
+            columns: [
+                { title: 'Sản phẩm' },
+                { title: 'Phân loại' },
+                { title: 'Mã SKU' }
+            ]
+        });
+
+        $('#productTable tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+            var product = { name: data[0], category: data[1], sku: data[2] };
+            selectedProducts.push(product);
+            updateSelectedProducts();
+        });
+
+        function updateSelectedProducts() {
+            var $list = $('#selectedProductList');
+            $list.empty();
+            selectedProducts.forEach(function(product) {
+                $list.append('<li>' + product.name + ', ' + product.category + '</li>');
+            });
+        }
+
+        $('#openPopupBtn').on('click', function() {
+            $('#productPopup').addClass('show');
+        });
+
+        $('.close-btn').on('click', function() {
+            $('#productPopup').removeClass('show');
+        });
+
+        $('#confirmBtn').on('click', function() {
+            console.log('Selected products:', selectedProducts);
+            $('#productPopup').removeClass('show');
+        });
+    });
+
+</script>
+</body>
+</html>
