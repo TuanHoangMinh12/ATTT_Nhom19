@@ -54,11 +54,11 @@
     <div class="product-content row">
       <div class="product-content-left">
         <div class="product-content-left-big-img">
-          <img src="${pageContext.request.contextPath}/${bookModel.image}" alt="">
+          <img src="${pageContext.request.contextPath}${bookModel.image}" alt="">
         </div>
         <div class="product-content-left-small-img d-flex">
           <c:forEach var="img" items="${listImage}">
-            <img src="${pageContext.request.contextPath}/${img}" alt="" style="margin-top: 10px">
+            <img src="${pageContext.request.contextPath}${img}" alt="" style="margin-top: 10px">
           </c:forEach>
         </div>
       </div>

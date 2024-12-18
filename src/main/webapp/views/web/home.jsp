@@ -90,7 +90,7 @@
                     <c:if test="${slide.idPr == 1}">
                         <div class="carousel-item active">
                             <a href="${slide.link}">
-                                <img src="${pageContext.request.contextPath}/${slide.img}" class="d-block w-100" alt="${slide.namePr}">
+                                <img src="${pageContext.request.contextPath}${slide.img}" class="d-block w-100" alt="${slide.namePr}">
                             </a>
                         </div>
                     </c:if>
@@ -137,7 +137,7 @@
                                     <c:if test="${bookPayTop.discount != 0}">
                                         <span class="card_sale active_sale">-${bookPayTop.discount}%</span>
                                     </c:if>
-                                    <img src="${pageContext.request.contextPath}/${bookPayTop.image}"
+                                    <img src="${pageContext.request.contextPath}${bookPayTop.image}"
                                          class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title title_book">${bookPayTop.name}</h5>
@@ -232,7 +232,7 @@
                                     <c:if test="${bookNew.discount != 0}">
                                         <span class="card_sale active_sale">-${bookNew.discount}%</span>
                                     </c:if>
-                                    <img src="${pageContext.request.contextPath}/${bookNew.image}"
+                                    <img src="${pageContext.request.contextPath}${bookNew.image}"
                                          class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title title_book">${bookNew.name}</h5>
@@ -326,7 +326,7 @@
                                         <span class="card_sale active_sale">-${bookSap.discount}%</span>
                                     </c:if>
 
-                                    <img src="${pageContext.request.contextPath}/${bookSap.image}"
+                                    <img src="${pageContext.request.contextPath}${bookSap.image}"
                                          class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title title_book">${bookSap.name}</h5>
@@ -416,7 +416,7 @@
                         <div class="col-md-12">
                             <div class="card h-60 card_author">
                                 <a href="/author?id=${author.idAuthor}">
-                                    <img src="${pageContext.request.contextPath}/${author.img}"
+                                    <img src="${pageContext.request.contextPath}${author.img}"
                                          class="card-img-top img_author" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title title_author">${author.name}</h5>

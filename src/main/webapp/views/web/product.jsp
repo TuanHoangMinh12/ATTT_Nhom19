@@ -375,7 +375,7 @@
                                                data-toggle="tooltip" data-placement="bottom"
                                                title="${book.name}">
                                                 <img class="card-img-top anh"
-                                                     src="${pageContext.request.contextPath}/${book.image}"
+                                                     src="${pageContext.request.contextPath}${book.image}"
                                                      alt="${book.name}">
                                                 <div class="card-body noidungsp mt-3">
                                                     <h6 class="card-title ten">${book.name} </h6>
