@@ -86,9 +86,16 @@
                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                 <td><a href="${pageContext.request.contextPath}/findDetail?id=${cart.id}">${cart.id}</a></td>
                 <td>${cart.idUser}</td>
-                <td>${cart.bills.get(0).address}</td>
-                <td>${cart.getTotalPriceFromCart()}</td>
-                <td>${cart.bills.get(0).paymentMethod}</td>
+                <c:if test="${cart.bills != null and !cart.bills.isEmpty()}">
+                  <td>${cart.bills.get(0).address}</td>
+                  <td>${cart.bills.get(0).paymentMethod}</td>
+                </c:if>
+                <c:if test="${cart.bills == null or cart.bills.isEmpty()}">
+                  <td colspan="2">Không có dữ liệu</td>
+                </c:if>
+
+                <td>${cart.getTotalPriceFromCart() != null ? cart.getTotalPriceFromCart() : "0"}</td>
+
                 <c:if test="${cart.inShip == 1}">
                   <td><span class="badge bg-danger">Chờ xử lí</span></td>
                 </c:if>
