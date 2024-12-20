@@ -99,7 +99,7 @@
           <h3 class="tile-title">SẢN PHẨM BÁN CHẠY</h3>
         </div>
         <div class="tile-body">
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered" id="bestSellingTable">
             <thead>
             <tr>
               <th>Mã sản phẩm</th>
@@ -132,7 +132,7 @@
           <h3 class="tile-title">TỔNG ĐƠN HÀNG</h3>
         </div>
         <div class="tile-body">
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered" id="orderSummaryTable">
             <thead>
             <tr>
               <th>ID đơn hàng</th>
@@ -165,7 +165,7 @@
           <h3 class="tile-title">SẢN PHẨM ĐÃ HẾT</h3>
         </div>
         <div class="tile-body">
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered" id="outOfStockTable">
             <thead>
             <tr>
               <th>Mã sản phẩm</th>
