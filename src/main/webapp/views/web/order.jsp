@@ -43,93 +43,113 @@
   <div class="container_left">
     <div class="cross"></div>
     <h2 class="header_center">THÔNG TIN ĐƠN HÀNG</h2>
-    <form id="submit_form" action="${pageContext.request.contextPath}/order/pay" method="post">
-      <div class="form-group input">
-        <label for="name">Họ và tên: <span class="obligatory">(*)</span></label>
-        <input type="text" class="form-control" id="name" placeholder="Họ và tên" value="${customer.firstName} ${customer.lastName}" onchange="nameOnChange(this.value)" disabled>
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="phone">Điện thoại: <span class="obligatory">(*)</span></label>
-        <input name="phone" type="text" class="form-control" id="phone" placeholder="Số điện thoại" value="${customer.phone}" onchange="phoneOnChange(this.value)">
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="email">Email: <span class="obligatory">(*)</span></label>
-        <input type="text" class="form-control" id="email" placeholder="Email" value="${customer.email}" onchange="emailOnChange(this.value)" disabled>
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="address">Địa chỉ nhận: <span class="obligatory">(*)</span></label>
-        <input name="address" type="text" class="form-control" id="address" placeholder="Địa chỉ nhận" onchange="addressOnChange(this.value)">
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="city">Tỉnh/Thành: <span class="obligatory">(*)</span></label>
-        <select name="city" class="form-control form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
-          <option value="" selected>Chọn tỉnh thành</option>
-        </select>
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="district">Quận/Huyện: <span class="obligatory">(*)</span></label>
-        <select    name="district" class="form-control form-select form-select-sm mb-3" id="district"
-                aria-label=".form-select-sm">
-          <option  value="" selected>Chọn quận huyện</option>
+<%--    <form id="submit_form" action="${pageContext.request.contextPath}/generate-pdf" method="post" target="_blank">--%>
+<%--      <div class="form-group input">--%>
+<%--        <label for="name">Họ và tên: <span class="obligatory">(*)</span></label>--%>
+<%--        <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên"--%>
+<%--               value="${customer.firstName} ${customer.lastName}" onchange="nameOnChange(this.value)" disabled>--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
 
-        </select>
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="ward">Phường/Xã: <span class="obligatory">(*)</span></label>
-        <select name="ward" class="form-control form-select form-select-sm" id="ward" aria-label=".form-select-sm">
-          <option  value="" selected>Chọn phường xã</option>
-        </select>
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="pack">Đóng gói: <span class="obligatory">(*)</span></label>
-        <select   name="pack" class="form-control" id="pack" aria-label=".form-select-sm">
-          <option value="" selected>Chọn quy cách đóng gói</option>
-          <option value="0">Bọc Blatic</option>
-          <option value="1">Để nguyên seal</option>
-        </select>
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="pay">Hình thức thanh toán: <span class="obligatory">(*)</span></label>
-        <select name="pay" class="form-control" id="pay" aria-label=".form-select-sm">
-          <option value="" selected>Chọn hình thức</option>
-          <option value="0">Cod: Giao hàng nhận tiền</option>
-          <option value="1">Chuyển khoảng</option>
-        </select>
-        <i class="fa-solid fa-circle-check"></i>
-        <i class="fa-solid fa-circle-xmark"></i>
-        <small>Error</small>
-      </div>
-      <div class="form-group input">
-        <label for="note">Ghi chú:</label>
-        <textarea class="form-control" name="note" rows="3" cols="20" id="note"
-                  placeholder="Ghi chú về đơn hàng"></textarea>
-      </div>
-      <button style="background-color: #ed4d2b;border: none;border-radius: 5px;width: 100%;padding: 6px 36px;color: #fff;font-size: 18px;"
-              type="button" id="bnt_submit" class="btn_submit">ĐẶT HÀNG</button>
+<%--      <div class="form-group input">--%>
+<%--        <label for="phone">Điện thoại: <span class="obligatory">(*)</span></label>--%>
+<%--        <input name="phone" type="text" class="form-control" id="phone" placeholder="Số điện thoại"--%>
+<%--               value="${customer.phone}" onchange="phoneOnChange(this.value)">--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="email">Email: <span class="obligatory">(*)</span></label>--%>
+<%--        <input type="text" class="form-control" id="email" name="email" placeholder="Email"--%>
+<%--               value="${customer.email}" onchange="emailOnChange(this.value)" disabled>--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="address">Địa chỉ nhận: <span class="obligatory">(*)</span></label>--%>
+<%--        <input name="address" type="text" class="form-control" id="address" placeholder="Địa chỉ nhận"--%>
+<%--               onchange="addressOnChange(this.value)">--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="city">Tỉnh/Thành: <span class="obligatory">(*)</span></label>--%>
+<%--        <select name="city" class="form-control form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">--%>
+<%--          <option value="" selected>Chọn tỉnh thành</option>--%>
+<%--        </select>--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="district">Quận/Huyện: <span class="obligatory">(*)</span></label>--%>
+<%--        <select name="district" class="form-control form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">--%>
+<%--          <option value="" selected>Chọn quận huyện</option>--%>
+<%--        </select>--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="ward">Phường/Xã: <span class="obligatory">(*)</span></label>--%>
+<%--        <select name="ward" class="form-control form-select form-select-sm" id="ward" aria-label=".form-select-sm">--%>
+<%--          <option value="" selected>Chọn phường xã</option>--%>
+<%--        </select>--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="pack">Đóng gói: <span class="obligatory">(*)</span></label>--%>
+<%--        <select name="pack" class="form-control" id="pack" aria-label=".form-select-sm">--%>
+<%--          <option value="" selected>Chọn quy cách đóng gói</option>--%>
+<%--          <option value="0">Bọc Blatic</option>--%>
+<%--          <option value="1">Để nguyên seal</option>--%>
+<%--        </select>--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="pay">Hình thức thanh toán: <span class="obligatory">(*)</span></label>--%>
+<%--        <select name="pay" class="form-control" id="pay" aria-label=".form-select-sm">--%>
+<%--          <option value="" selected>Chọn hình thức</option>--%>
+<%--          <option value="0">Cod: Giao hàng nhận tiền</option>--%>
+<%--          <option value="1">Chuyển khoản</option>--%>
+<%--        </select>--%>
+<%--        <i class="fa-solid fa-circle-check"></i>--%>
+<%--        <i class="fa-solid fa-circle-xmark"></i>--%>
+<%--        <small>Error</small>--%>
+<%--      </div>--%>
+
+<%--      <div class="form-group input">--%>
+<%--        <label for="note">Ghi chú:</label>--%>
+<%--        <textarea class="form-control" name="note" rows="3" cols="20" id="note" placeholder="Ghi chú về đơn hàng"></textarea>--%>
+<%--      </div>--%>
+
+<%--      <button style="background-color: #ed4d2b;border: none;border-radius: 5px;width: 100%;padding: 6px 36px;color: #fff;font-size: 18px;"--%>
+<%--              type="submit" id="bnt_submit" class="btn_submit">ĐẶT HÀNG</button>--%>
+<%--    </form>--%>
+
+    <form id="pdfForm" action="${pageContext.request.contextPath}/generate-pdf" method="post" target="_blank">
+      <input type="hidden" name="name" value="Nguyen Van A">
+      <input type="hidden" name="phone" value="0123456789">
+      <input type="hidden" name="email" value="example@gmail.com">
+      <input type="hidden" name="address" value="123 Đường ABC">
+      <input type="hidden" name="note" value="Ghi chú đơn hàng">
+      <button type="submit">Tải PDF</button>
     </form>
   </div>
   <div class="container_right">
@@ -222,8 +242,13 @@
   })
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
-
+<script>
+  document.getElementById("pdfForm").onsubmit = function () {
+    setTimeout(() => {
+      window.location.href = "${pageContext.request.contextPath}/views/web/home.jsp";
+    }, 1000); // Chuyển hướng sau 1 giây
+  };
+</script>
 </body>
 
 </html>

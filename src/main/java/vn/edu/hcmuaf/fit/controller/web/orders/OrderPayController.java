@@ -81,7 +81,13 @@ public class OrderPayController extends HttpServlet {
         // lấy thông tin từ session ra
         HttpSession httpSession = request.getSession();
         InformationDeliverModel informationDeliverModel = (InformationDeliverModel) httpSession.getAttribute("deliver");
+        if (informationDeliverModel == null) {
+            informationDeliverModel = new InformationDeliverModel();
+            httpSession.setAttribute("deliver", informationDeliverModel);
+        }
         informationDeliverModel.setIdCart(idCart);
+
+
 
 
         // lưu informationDeliver vào DB

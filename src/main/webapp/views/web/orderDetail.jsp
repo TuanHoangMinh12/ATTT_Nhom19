@@ -127,7 +127,6 @@
 
                     </table>
 
-                    <div   class="parent-button"><button  class="centered-button" >check</button></div>
 
                 </div>
 

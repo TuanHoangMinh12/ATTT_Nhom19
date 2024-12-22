@@ -97,7 +97,7 @@
                     <c:if test="${slide.idPr != 1}">
                         <div class="carousel-item">
                             <a href="${slide.link}">
-                                <img src="${pageContext.request.contextPath}/${slide.img}" class="d-block w-100" alt="${slide.namePr}">
+                                <img src="${pageContext.request.contextPath}${slide.img}" class="d-block w-100" alt="${slide.namePr}">
                             </a>
                         </div>
                     </c:if>

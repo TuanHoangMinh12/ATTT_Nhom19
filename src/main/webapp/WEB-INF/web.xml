@@ -28,6 +28,15 @@
     <filter-class>vn.edu.hcmuaf.fit.filter.AuthorizationFilter</filter-class>
   </filter>
 
+  <servlet>
+    <servlet-name>GeneratePdfServlet</servlet-name>
+    <servlet-class>vn.edu.hcmuaf.fit.controller.web.pdf.GeneratePdfServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GeneratePdfServlet</servlet-name>
+    <url-pattern>/generate-pdf</url-pattern>
+  </servlet-mapping>
+
   <filter-mapping>
     <filter-name>servletFilter</filter-name>
     <url-pattern>/*</url-pattern>

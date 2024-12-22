@@ -61,29 +61,29 @@ public class OrderDetailController extends HttpServlet {
         String hash1 = sha256Util.check(order);
          OrderReviewDetail o = cartDao.getAllByIdUserAndIdCart(idUser,idInt);
         List<CartDetailModel> cartDaos =cartDao.getAllDetailCart(idUser,idInt);
-
-
-        try {
-            rsa.setPublicKey(publicKey);
-            String hash2 = rsa.decrypt(verfy);
-           if(hash1.equals(hash2)){
-               request.setAttribute("successMessage", "Verification successful!");
-           }else{
-               //kiem tr neu 2 chuoi hash khác nhau thi don hang bị huỷ
-               if(!hash1.equals(hash2)){
-                   String or = objectVerifyUtil.stringPrinlt(idUser,idInt);
-                   CartDao dao = new CartDao();
-                   String link = "<a href=\"" + request.getContextPath() + "/account?action=reviewOrders\" style=\"color: #007FFF; text-decoration: none;\">Confirm</a>";
-                  // update ve trang thai don hang huỷ
-                   dao.updateCart(idInt, 4);
-                   request.setAttribute("nosuccessMessage", "The order information is wrong, do you want to cancel the order ?  " +link );
-               }
-           }
-        } catch (Exception e) {
-            // bao loi
-            request.setAttribute("nosuccessMessage", "Verification no successful!");
-
-        }
+        CartDao dao = new CartDao();
+        dao.updateCart(idInt, 4);
+//        try {
+//            rsa.setPublicKey(publicKey);
+//            String hash2 = rsa.decrypt(verfy);
+//           if(hash1.equals(hash2)){
+//               request.setAttribute("successMessage", "Verification successful!");
+//           }else{
+//               //kiem tr neu 2 chuoi hash khác nhau thi don hang bị huỷ
+//               if(!hash1.equals(hash2)){
+//                   String or = objectVerifyUtil.stringPrinlt(idUser,idInt);
+//
+//                   String link = "<a href=\"" + request.getContextPath() + "/account?action=reviewOrders\" style=\"color: #007FFF; text-decoration: none;\">Confirm</a>";
+//                  // update ve trang thai don hang huỷ
+//
+//                   request.setAttribute("nosuccessMessage", "The order information is wrong, do you want to cancel the order ?  " +link );
+//               }
+//           }
+//        } catch (Exception e) {
+//            // bao loi
+//            request.setAttribute("nosuccessMessage", "Verification no successful!");
+//
+//        }
 
         for (CartDetailModel c :cartDaos){
             request.setAttribute("id", c.getId());
