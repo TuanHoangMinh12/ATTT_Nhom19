@@ -140,17 +140,25 @@ public class KeyManagementApp extends JFrame {
 
     private void reportLostKey() {
         try {
-            if (txtPublicKey.getText().isEmpty()) {
-                lblMessage.setText("Không có private key để báo mất.");
+            if (userEmail == null || userEmail.isEmpty()) {
+                lblMessage.setText("Không có email người dùng để báo mất key.");
                 lblMessage.setForeground(Color.RED);
                 return;
             }
 
-            // Hiển thị thông báo giả lập (thay bằng logic API thực tế nếu cần)
-            lblMessage.setText("Đã báo mất private key thành công!");
+            // Báo mất key và tạo cặp khóa mới qua KeyService
+            keyService.reportLostKeyAndGenerateNewKey(userEmail);
+
+            // Cập nhật giao diện hiển thị khóa mới
+            String newPrivateKey = keyService.getPrivateKey();
+            String newPublicKey = keyService.getPublicKey();
+            txtPrivateKey.setText(newPrivateKey);
+            txtPublicKey.setText(newPublicKey);
+
+            lblMessage.setText("Đã báo mất key và tạo cặp key mới thành công!");
             lblMessage.setForeground(Color.GREEN);
         } catch (Exception ex) {
-            lblMessage.setText("Lỗi khi báo mất key.");
+            lblMessage.setText("Lỗi khi báo mất key và tạo key mới.");
             lblMessage.setForeground(Color.RED);
             ex.printStackTrace();
         }
