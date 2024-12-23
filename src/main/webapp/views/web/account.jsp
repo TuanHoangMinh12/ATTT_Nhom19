@@ -49,6 +49,9 @@
                 Private Key</a>
             </li>
             <li class="first">
+              <a id="managementKey" title="Quản lý Key"  href="${pageContext.request.contextPath}/account?action=changePrivateKey">Quản lý Key</a>
+            </li>
+            <li class="first">
               <a id="logout" title="Đăng xuất" href="${pageContext.request.contextPath}/logout?action=logout">Đăng xuất</a>
             </li>
           </ul>
