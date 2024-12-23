@@ -75,4 +75,44 @@ public class KeyService {
             e.printStackTrace();
         }
     }
+    public void reportLostKeyAndGenerateNewKey(String email) {
+        String selectIdQuery = "SELECT id_user FROM customer WHERE email = ?";
+        String expireOldKeysQuery = "UPDATE public_key SET status = 0, expire = NOW() WHERE id_user = ? AND status = 1";
+//        String insertNewKeyQuery = "INSERT INTO public_key (id_user, public_key, create_date, expire, status) VALUES (?, ?, NOW(), NULL, 1)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement selectIdStmt = connection.prepareStatement(selectIdQuery)) {
+
+            // Lấy id_user từ email
+            selectIdStmt.setString(1, email);
+            try (ResultSet resultSet = selectIdStmt.executeQuery()) {
+                if (resultSet.next()) {
+                    int idUser = resultSet.getInt("id_user");
+
+                    // Cập nhật trạng thái các khóa cũ
+                    try (PreparedStatement expireStmt = connection.prepareStatement(expireOldKeysQuery)) {
+                        expireStmt.setInt(1, idUser);
+                        expireStmt.executeUpdate();
+                    }
+
+                    // Tạo cặp key mới
+                    generateKeyPair();
+                    String newPublicKey = getPublicKey();
+
+                    // Lưu public key mới vào database
+//                    try (PreparedStatement insertStmt = connection.prepareStatement(insertNewKeyQuery)) {
+//                        insertStmt.setInt(1, idUser);
+//                        insertStmt.setString(2, newPublicKey);
+//                        insertStmt.executeUpdate();
+//                    }
+
+                    System.out.println("Cặp khóa mới đã được tạo và lưu thành công.");
+                } else {
+                    System.out.println("Không tìm thấy người dùng với email: " + email);
+                }
+            }
+        } catch (SQLException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
 }
