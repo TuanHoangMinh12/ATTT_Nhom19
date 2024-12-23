@@ -133,12 +133,12 @@
               </div>
             </c:if>
             <c:if test="${isVerify == '1'}">
-              <div class="alert alert-success" role="alert">
+              <div id="success-alert" class="alert alert-success" role="alert">
                 Đơn hàng đã được xác thực
               </div>
             </c:if>
             <c:if test="${isVerify == '0'}">
-              <div class="alert alert-danger" role="alert">
+              <div id="danger-alert" class="alert alert-danger" role="alert">
                 Đơn hàng chưa được xác thực
               </div>
             </c:if>
@@ -337,7 +337,15 @@
 </div>
 <!-----footer------>
 <%@include file="/common/web/footer.jsp"%>
-
+<script>
+  // Đợi 2 giây (2000 ms) rồi ẩn thông báo
+  setTimeout(function() {
+    const successAlert = document.getElementById("success-alert");
+    const dangerAlert = document.getElementById("danger-alert");
+    if (successAlert) successAlert.style.display = "none";
+    if (dangerAlert) dangerAlert.style.display = "none";
+  }, 2000); // 2000 ms = 2 giây
+</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
