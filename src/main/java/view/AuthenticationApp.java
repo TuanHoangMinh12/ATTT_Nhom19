@@ -1,5 +1,6 @@
 package view;
 
+import service.CustomerService;
 import service.EmailService;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class AuthenticationApp extends JFrame {
     private JLabel lblMessage;
     private String generatedOtp = ""; // Biến lưu mã OTP đã gửi
     private String userEmail = ""; // Biến lưu email người dùng sau khi xác thực
-
+    CustomerService customerService = new CustomerService();
     public AuthenticationApp() {
         // Thiết lập cửa sổ
         setTitle("Xác thực OTP");
@@ -77,10 +78,14 @@ public class AuthenticationApp extends JFrame {
                     lblMessage.setText("Xác nhận thành công!");
                     lblMessage.setForeground(Color.GREEN);
 
-                    // Chuyển sang KeyManagementApp và truyền email vào đó
-                    KeyManagementApp keyManagementApp = new KeyManagementApp(userEmail); // Truyền email vào constructor
-                    keyManagementApp.setVisible(true);
+                int id=    customerService.findUserIdByEmail(userEmail);
+                if(id!=0){
+                  FileSignerApp fileSignerApp = new FileSignerApp(userEmail); // Truyền email vào constructor
+                    fileSignerApp.setVisible(true);
                     dispose();  // Đóng cửa sổ xác thực sau khi xác nhận thành công
+                }
+                    // Chuyển sang KeyManagementApp và truyền email vào đó
+
                 } else {
                     lblMessage.setText("Mã OTP không chính xác.");
                     lblMessage.setForeground(Color.RED);
