@@ -259,4 +259,35 @@ public class BillManagementDAO implements IBillManagementDAO {
             }
         }
     }
+
+    @Override
+    public boolean verifySignature(String id_order) {
+        Connection connection = JDBCConnector.getConnection();
+        String sqlCheck = "SELECT is_valid_signature FROM orders WHERE id_order = ?";
+        PreparedStatement statementCheck = null;
+        boolean isValidSignature = false;
+
+        if (connection != null) {
+            try {
+                // Kiểm tra chữ ký
+                statementCheck = connection.prepareStatement(sqlCheck);
+                statementCheck.setString(1, id_order);
+                ResultSet resultSet = statementCheck.executeQuery();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (statementCheck != null) statementCheck.close();
+                    if (connection != null) connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return isValidSignature;
+    }
+
+
 }

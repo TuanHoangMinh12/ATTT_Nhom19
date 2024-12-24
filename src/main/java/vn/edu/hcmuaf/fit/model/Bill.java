@@ -182,6 +182,7 @@ public class Bill {
         this.shippingInfo = shippingInfo;
     }
 
+
     public String getInfo() {
         return info;
     }
@@ -264,6 +265,8 @@ public class Bill {
             default: return "error";
         }
     }
+
+
     public static void main(String[] args) {
         CartDao cartDao = new CartDao();
         ArrayList<CartModel> listModel = cartDao.getAllCartByIdUser(40);

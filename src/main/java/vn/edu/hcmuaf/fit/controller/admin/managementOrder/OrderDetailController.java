@@ -66,15 +66,17 @@ public class OrderDetailController extends HttpServlet {
             String hash2 = rsa.decrypt(verfy);
             if(hash1.equals(hash2)){
                 request.setAttribute("successMessage", "Verification successful!");
-            }else{
+                cartDao.updateCart(idInt, 3); // Đã ký
+            }else {
                 if(!hash1.equals(hash2)){
-                    String link = "<a href=\"" + request.getContextPath() + "/admin-table-order\" style=\"color: #007FFF; text-decoration: none;\">Confirm</a>";
-                    cartDao.updateCart(idInt,4);
-                    request.setAttribute("nosuccessMessage", "The order information is wrong, do you want to cancel the order ? " +link );
+                    String link = "<a href=\"" + request.getContextPath() + "/admin-delete-order?id=" + idInt + "\" style=\"color: #007FFF; text-decoration: none;\">Delete Order</a>";
+                    cartDao.updateCart(idInt, 5); // Đã chỉnh sửa
+                    request.setAttribute("nosuccessMessage", "The order information is wrong, do you want to delete the order? " + link);
                 }
             }
         } catch (Exception e) {
-            request.setAttribute("nosuccessMessage", "Verification no successful!");
+            request.setAttribute("nosuccessMessage", "Verification not successful!");
+            cartDao.updateCart(idInt, 5); // Đã chỉnh sửa
         }
 
         request.setAttribute("CUSTOMER", customerDAO.findById(cartModel.getIdUser())) ;

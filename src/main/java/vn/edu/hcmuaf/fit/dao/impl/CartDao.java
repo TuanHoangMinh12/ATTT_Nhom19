@@ -432,7 +432,7 @@ public class CartDao {
     public CartModel getCartById( int idCart) {
         CartModel result = new CartModel();
 
-        String sql = "SELECT id, idUser, timeShip, feeShip, totalPrice, infoShip, create_Time FROM carts WHERE id =?";
+        String sql = "SELECT id, idUser, timeShip, feeShip, totalPrice, infoShip,  create_Time FROM carts WHERE id =?";
         Connection connection = JDBCConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -472,7 +472,7 @@ public class CartDao {
     }
     public ArrayList<CartModel> getAllCart() {
         ArrayList<CartModel> result = new ArrayList<>();
-        String sql = "SELECT id, idUser, timeShip, feeShip, totalPrice, infoShip, create_time\n" +
+        String sql = "SELECT id, idUser, timeShip, feeShip, totalPrice, infoShip create_time\n" +
                 "FROM carts ";
         Connection connection = JDBCConnector.getConnection();
         PreparedStatement statement = null;

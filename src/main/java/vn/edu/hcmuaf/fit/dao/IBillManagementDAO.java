@@ -17,4 +17,6 @@ public interface IBillManagementDAO {
 
     void confirmBill(String id_order);
     void deleteBill(String id_order);
+
+    boolean verifySignature(String id_order);
 }

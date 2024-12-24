@@ -74,9 +74,10 @@
               <th>ID đơn hàng</th>
               <th>Mã Khách hàng</th>
               <th>Địa chỉ</th>
-              <th>Thành tiền</th>
               <th>Phương thức thanh toán</th>
+              <th>Thành tiền</th>
               <th>Tình trạng đơn hàng</th>
+              <th>Kiểm tra chữ ký</th>
               <th>Tính năng</th>
             </tr>
             </thead>
@@ -108,6 +109,20 @@
                 <c:if test="${cart.inShip == 4}">
                   <td><span class="badge bg-primary">Đã hủy</span></td>
                 </c:if>
+
+<%--                <c:if test="${cart.OrderStatus == 1}">--%>
+<%--                  <td><span class="badge bg-success">Đã ký</span></td>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${cart.OrderStatus == 2}">--%>
+<%--                  <td><span class="badge bg-primary">Đã chỉnh sửa</span></td>--%>
+<%--                </c:if>--%>
+
+                <td>
+                  <!-- Button: Kiểm tra chữ ký -->
+                  <button type="button" class="btn btn-secondary" onclick="verifySignature(${cart.id})">
+                    Kiểm tra
+                  </button>
+                </td>
                 <td>
                   <a href="${pageContext.request.contextPath}/admin-order-detail?id=${cart.id}">
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button>
@@ -313,6 +328,15 @@ MODAL
   $("#show-emp").on("click", function () {
     $("#ModalUP").modal({ backdrop: false, keyboard: false })
   });
+</script>
+
+<script>
+  function verifySignature(cartId) {
+    fetch(`/verifySignature?id=${cart.id}`)
+            .then(response => response.text())
+            .then(message => alert(message))
+            .catch(error => alert("Đã xảy ra lỗi: " +error));
+  }
 </script>
 </body>
 

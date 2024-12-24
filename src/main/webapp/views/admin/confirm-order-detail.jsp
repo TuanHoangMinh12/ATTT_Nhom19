@@ -161,9 +161,41 @@
                                               <td>Đã đăng kí vận chuyển</td>
                                           </c:if>
                                       </tr>
+                                      <tr>
+                                          <td>Trạng thái:</td>
+                                          <td>
+                                              <c:if test="${cart.getInFoShipString() == 'Đã ký'}">
+                                                  <span>Đã ký</span>
+                                              </c:if>
+                                              <c:if test="${cart.getInFoShipString() == 'Đã chỉnh sửa'}">
+                                                  <span>Đã chỉnh sửa</span>
+                                              </c:if>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <!-- Button: Xem chi tiết -->
+                                              <button type="button" class="btn btn-primary" onclick="viewOrderDetails(${cart.id})">
+                                                  Xem chi tiết
+                                              </button>
+
+                                              <!-- Button: Tải đơn hàng -->
+                                              <button type="button" class="btn btn-secondary" onclick="downloadOrder(${cart.id})">
+                                                  Tải đơn hàng
+                                              </button>
+
+                                              <!-- Button: Xóa đơn hàng -->
+                                              <button type="button" class="btn btn-danger" href="${pageContext.request.contextPath}/removerBill?id=${cart.id}">
+                                                  Xóa đơn hàng
+                                              </button>
+                                          </td>
+                                      </tr>
                                       </tbody>
                                   </table>
                               </div>
+                              <button type="button" class="btn btn-danger" style="float: right;">
+                                  <a style="color: #FFFFFF; text-decoration: none;" href="${pageContext.request.contextPath}/removerBill?id=${cart.id}">Xóa đơn hàng</a>
+                              </button>
                           </div>
                           <div class="row">
                               <div class="col-md-12">
@@ -238,7 +270,7 @@
                     </div>
                     <div class="form-group col-md-6 ">
                         <label for="exampleSelect1" class="control-label">Tình trạng sản phẩm</label>
-                        <select class="form-control" id="exampleSelect1">
+                        <select class="form-control" id="exampleSelect">
                             <option>Còn hàng</option>
                             <option>Hết hàng</option>
                             <option>Đang nhập hàng</option>
