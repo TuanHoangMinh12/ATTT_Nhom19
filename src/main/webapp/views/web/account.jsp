@@ -44,13 +44,28 @@
             <li class="first">
               <a id="reviewOrders" title="Xem lại đơn hàng" href="${pageContext.request.contextPath}/account?action=reviewOrders">Xem
                 lại đơn hàng</a></li>
+<%--            <li class="first">--%>
+<%--              <a id="changePrivateKey" title="Đổi Private Key"  href="${pageContext.request.contextPath}/account?action=changePrivateKey">Đổi--%>
+<%--                Private Key</a>--%>
+<%--            </li>--%>
             <li class="first">
-              <a id="changePrivateKey" title="Đổi Private Key"  href="${pageContext.request.contextPath}/account?action=changePrivateKey">Đổi
-                Private Key</a>
+              <a id="managementKey" title="Quản lý Key" href="#" onclick="runJar()">Quản lý Key</a>
             </li>
-            <li class="first">
-              <a id="managementKey" title="Quản lý Key"  href="${pageContext.request.contextPath}/account?action=changePrivateKey">Quản lý Key</a>
-            </li>
+            <script>
+              function runJar() {
+                fetch('${pageContext.request.contextPath}/accountt?action=runJar', {
+                  method: 'POST'
+                })
+                        .then(response => response.text())
+                        .then(data => {
+                          alert(data); // Hiển thị thông báo từ server
+                        })
+                        .catch(error => {
+                          console.error('Error:', error);
+                          alert('Có lỗi xảy ra khi chạy file JAR.');
+                        });
+              }
+            </script>
             <li class="first">
               <a id="logout" title="Đăng xuất" href="${pageContext.request.contextPath}/logout?action=logout">Đăng xuất</a>
             </li>
