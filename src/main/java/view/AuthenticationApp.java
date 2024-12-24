@@ -1,5 +1,6 @@
 package view;
 
+import service.CustomerService;
 import service.EmailService;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class AuthenticationApp extends JFrame {
     private JLabel lblMessage;
     private String generatedOtp = ""; // Biến lưu mã OTP đã gửi
     private String userEmail = ""; // Biến lưu email người dùng sau khi xác thực
-
+    CustomerService customerService = new CustomerService();
     public AuthenticationApp() {
         // Thiết lập cửa sổ
         setTitle("Xác thực OTP");

@@ -14,6 +14,7 @@ public class KeyManagementApp extends JFrame {
     private JButton btnGenerateKey;
     private JButton btnSavePrivateKey;
     private JButton btnReportLostKey;
+    private  JButton btnSignOrder;
     private JLabel lblMessage;
     private String userEmail;  // Biến lưu email người dùng
 
@@ -38,9 +39,11 @@ public class KeyManagementApp extends JFrame {
         JPanel topPanel = new JPanel(new GridLayout(1, 3, 10, 10));
         btnGenerateKey = new JButton("Tạo Cặp Key");
         btnSavePrivateKey = new JButton("Lưu Key");
+        btnSignOrder = new JButton("Ký Đơn Hàng");
         btnReportLostKey = new JButton("Báo Mất Key");
         topPanel.add(btnGenerateKey);
         topPanel.add(btnSavePrivateKey);
+        topPanel.add(btnSignOrder);
         topPanel.add(btnReportLostKey);
 
         // Panel giữa: hiển thị private và public key
@@ -73,6 +76,12 @@ public class KeyManagementApp extends JFrame {
         btnGenerateKey.addActionListener(e -> generateKey());
         btnSavePrivateKey.addActionListener(e -> savePrivateKey());
         btnReportLostKey.addActionListener(e -> reportLostKey());
+        btnSignOrder.addActionListener(e -> signOrder());
+    }
+
+    private void signOrder() {
+        FileSignerApp fileSignerApp=new FileSignerApp(userEmail);
+        fileSignerApp.setVisible(true);
     }
 
     private void checkDatabaseConnection() {
