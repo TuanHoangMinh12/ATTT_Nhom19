@@ -4,6 +4,7 @@ import vn.edu.hcmuaf.fit.dao.IProductDAO;
 import vn.edu.hcmuaf.fit.dao.impl.CartDao;
 import vn.edu.hcmuaf.fit.dao.impl.ProductDAO;
 import vn.edu.hcmuaf.fit.model.CartModel;
+import vn.edu.hcmuaf.fit.model.CustomerModel;
 import vn.edu.hcmuaf.fit.model.Product;
 
 import javax.servlet.*;
@@ -17,6 +18,16 @@ public class OrderBuyNowControlller extends HttpServlet {
     private final CartDao cartDao = new CartDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        CustomerModel customer1 = (CustomerModel) request.getSession().getAttribute("customer");
+        if (customer1 != null) {
+            int orderCount = cartDao.countCartsByUserId(customer1.getIdUser()); // Ví dụ: lấy từ database
+            HttpSession session = request.getSession();
+            session.setAttribute("orderCount", orderCount);
+        } else {
+            System.out.println("Customer not found in session.");
+        }
         String productId = request.getParameter("product_id");
         if (productId != null) {
             Product product = productDAO.getProductById(Integer.parseInt(productId));

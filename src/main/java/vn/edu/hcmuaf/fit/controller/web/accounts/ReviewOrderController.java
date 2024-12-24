@@ -23,7 +23,7 @@ public class ReviewOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CustomerModel cus = (CustomerModel) SessionUtil.getInstance().getValue(request, "USERMODEL");
         String orderSuccess = request.getParameter("orderSuccess");
-        String isVerify = request.getParameter("isVerify");
+
         List<CartModel> listModel = cartDao.getAllCartByIdUser(cus.getIdUser());
         for(int i =0 ;i < listModel.size();i++) {
             listModel.get(i).setBills(new BillDAO().findAllBillByIdCart( listModel.get(i).getId()));
@@ -41,8 +41,8 @@ public class ReviewOrderController extends HttpServlet {
         request.setAttribute("listBillRateByIdOrder",  cartModelsChuaRate(cus,3));
         request.setAttribute("listBillByIdOrder", listDonHang(cus,3));
         request.setAttribute("orderSuccess", orderSuccess);
-        request.setAttribute("isVerify", isVerify);
-        System.out.println("isVerify: " +isVerify);
+
+
         request.getRequestDispatcher("/views/web/reviewOrders.jsp").forward(request, response);
 
 

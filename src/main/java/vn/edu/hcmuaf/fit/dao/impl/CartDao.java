@@ -33,6 +33,38 @@ public class CartDao {
         }
     }
 
+
+    public int countCartsByUserId(int idUser) {
+        String sql = "SELECT COUNT(*) AS cartCount FROM carts WHERE idUser = ?";
+        Connection connection = JDBCConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int count = 0;
+
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, idUser); // Gán giá trị `idUser` vào câu lệnh SQL
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                count = resultSet.getInt("cartCount"); // Lấy giá trị từ cột `cartCount`
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log lỗi nếu có
+        } finally {
+            // Đóng các tài nguyên
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return count; // Trả về số lượng Cart
+    }
+
     public int setID() {
         Connection connection = JDBCConnector.getConnection();
         String sql = new String("SELECT id FROM carts ORDER BY id DESC LIMIT 1;");
@@ -867,7 +899,8 @@ public class CartDao {
 
     public static void main(String[] args) {
         CartDao cartDao = new CartDao();
-
+        int  sl = cartDao.countCartsByUserId(54);
+        System.out.println(sl);
 //        System.out.println(cartDao.getAllByIdUserAndIdCartNoTimeship(54,75));
 
 //        System.out.println(cartDao.getAllByIdUserAndIdCartNoTime(54,75));

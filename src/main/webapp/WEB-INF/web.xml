@@ -28,6 +28,8 @@
     <filter-class>vn.edu.hcmuaf.fit.filter.AuthorizationFilter</filter-class>
   </filter>
 
+
+
   <filter-mapping>
     <filter-name>servletFilter</filter-name>
     <url-pattern>/*</url-pattern>
